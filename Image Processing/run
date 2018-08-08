@@ -1,0 +1,7 @@
+#!/bin/bash
+gcc -o simagpro serial_imagpro.c
+gcc -o ompimagpro -fopenmp omp_imagpro.c
+
+./simagpro
+export OMP_NUM_THREADS=4
+./ompimagpro

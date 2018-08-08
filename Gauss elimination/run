@@ -1,0 +1,7 @@
+#!/bin/bash
+gcc -o serial_obe serial_obe.c
+gcc -o omp_obe -fopenmp omp_obe.c
+
+./serial_obe
+export OMP_NUM_THREADS=4
+./omp_obe

@@ -1,0 +1,12 @@
+#!/bin/bash
+gcc -o gen matrix_vector_generator.c
+gcc -o smvm serial_matrix_vector_multiplication.c
+mpicc -o mpimvm mpi_matrix_vector_multiplication.c
+mpicc -o mpireducemvm mpi_reduce_matrix_vector_multiplication.c
+gcc -o ompmvm -fopenmp omp_matrix_vector_multiplication.c
+./gen
+./smvm
+export OMP_NUM_THREADS=4
+./ompmvm
+mpirun -np 4 ./mpireducemvm
+mpirun -np 4 ./mpimvm
